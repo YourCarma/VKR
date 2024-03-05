@@ -6,8 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-researches/lenta-ru-news.rar
-researches/w2v_cbow_1500.bin
 # Distribution / packaging
 .Python
 build/
@@ -165,3 +163,5 @@ migrations/
 migrations
 .env
 .env
+researches/lenta-ru-news.rar
+researches/w2v_cbow_1500.bin
