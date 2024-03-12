@@ -165,3 +165,6 @@ migrations
 .env
 researches/lenta-ru-news.rar
 researches/w2v_cbow_1500.bin
+researches/lenta_ru_news_2019_2023.csv
+researches/lenta-ru-news.csv
+researches/tags_value_counts.csv
