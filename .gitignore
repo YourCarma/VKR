@@ -170,3 +170,8 @@ researches/lenta-ru-news.csv
 researches/tags_value_counts.csv
 researches/reduced_news.csv
 researches/reduced_news.rar
+researches/reduced_news_with_vetors.rar
+researches/Clustering_research.ipynb
+researches/w2v_cbow_334272.bin
+researches/w2v_skipgram_334272.bin
+researches/reduced_news_with_vetors.csv
