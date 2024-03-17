@@ -28,7 +28,7 @@
     "vue-plotly": "^1.1.0",
     "vue-router": "^4.0.3",
     "vue-sidebar-menu-akahon": "^0.1.4",
-    "vue-yandex-maps": "^0.12.3",
+    "vue-yandex-maps": "^0.12.7",
     "vue3-easy-data-table": "^1.5.39",
     "vuewordcloud": "^19.0.0",
     "vuex": "^4.0.2"

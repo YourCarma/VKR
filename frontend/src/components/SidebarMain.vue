@@ -3,7 +3,7 @@
     <router-link to="/">
       <div class="">
         <div class="absolute -left-[13px] -top-4 z-10 duration-500">
-          <span class="duration-500">
+          <!-- <span class="duration-500">
             <svg
               width="275"
               height="90"
@@ -39,17 +39,17 @@
                 </g>
               </g>
             </svg>
-          </span>
+          </span> -->
         </div>
         <p
-          class="text-activeText text-8xl text-center rainbows z-20 font-stengazeta -mb-5 duration-500"
+          class="text-activeText text-6xl text-center rainbows z-20 font-stengazeta -mb-5 duration-500"
         >
-          СОВА
+          МИРОТВОРЕЦ
         </p>
         <p
-          class="text-base z-30 font-stengazeta text-center text-activeText duration-500"
+          class="text-base z-30 font-stengazeta text-center text-activeText duration-500 mt-2"
         >
-          интеллектуальный помощник
+          интеллектуальный агрегатор событий
         </p>
       </div>
     </router-link>
@@ -93,60 +93,18 @@ export default {
     services() {
       return [
         {
-          category: "Чат",
-          name: "chat",
+          category: "Карта событий",
+          name: "map",
           classed: "w-8 h-8 text-blue-400",
           route: "/",
           isActive: this.$route.path === "/",
         },
         {
-          category: "Переводчик",
-          name: "translate",
+          category: "Список источников",
+          name: "news",
           classed: "w-8 h-8 text-yellow-400",
           route: "/translater",
           isActive: this.$route.path === "/translater",
-        },
-        {
-          category: "Распознать текст",
-          name: "eye",
-          classed: "w-8 h-8 text-purple-400",
-          route: "/scan_from_docs",
-          isActive: this.$route.path === "/scan_from_docs",
-        },
-        {
-          category: "Поиск документов",
-          name: "search",
-          classed: "w-8 h-8 text-green-400",
-          route: "/search_document",
-          isActive: this.$route.path === "/search_document",
-        },
-        {
-          category: "Распознать аудио",
-          name: "microphone",
-          classed: "w-8 h-8 text-red-700",
-          route: "/audio_recognition",
-          isActive: this.$route.path === "/audio_recognition",
-        },
-        {
-          category: "Преобразовать в аудио",
-          name: "gromko",
-          classed: "w-8 h-8 text-orange-400",
-          route: "/text_to_audio",
-          isActive: this.$route.path === "/text_to_audio",
-        },
-        {
-          category: "Распознать объект",
-          name: "flag",
-          classed: "w-8 h-8 text-red-400",
-          route: "/image_recognition",
-          isActive: this.$route.path === "/image_recognition",
-        },
-        {
-          category: "Сформировать документ",
-          name: "news",
-          classed: "w-8 h-8 text-green-200",
-          route: "/2",
-          isActive: this.$route.path === "/2",
         },
         {
           category: "Все сервисы",

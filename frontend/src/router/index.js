@@ -11,7 +11,7 @@ const routes = [
     path: "/translater",
     name: "TranslateService",
 
-    component: () => import("../views/TranslatedService.vue"),
+    component: () => import("../views/SourceManagementService.vue"),
   },
   {
     path: "/audio_recognition",
@@ -47,7 +47,7 @@ const routes = [
     path: "/",
     name: "Assistant",
 
-    component: () => import("../views/Assistant.vue"),
+    component: () => import("../views/MapEventsService.vue"),
   },
   {
     path: "/notfound",
