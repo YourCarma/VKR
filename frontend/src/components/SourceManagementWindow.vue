@@ -44,7 +44,7 @@
               <div  @click="openAddSource" class="cursor-pointer w-full h-full flex items-center justify-center">
                 <button  class="text-white text-xl font-bold">Добавить</button>
               </div>
-              <div v-if="addSourceIsOpen" class="absolute mt-12">
+              <div v-if="addSourceIsOpen" class="absolute mt-12 ">
                 <AddSource />
               </div>
             </div>
