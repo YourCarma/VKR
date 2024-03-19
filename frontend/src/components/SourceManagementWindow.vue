@@ -27,13 +27,13 @@
               </div>
             </div>
             <div
-              class="w-36 h-12 bg-red-500 rounded-full flex items-center justify-center flex-col hover:bg-red-700 duration-200"
+              class="w-36 h-12 bg-red-500 rounded-full flex items-center justify-center flex-col hover:bg-red-700 duration-200 ml-2"
             >
               <span class="text-white text-xs font-bold">Пророссийских </span>
               <span class="text-white text-lg font-bold">105</span>
             </div>
             <div
-              class="w-36 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-col hover:bg-blue-700 duration-200"
+              class="w-36 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-col hover:bg-blue-700 duration-200 ml-2 "
             >
               <span class="text-white text-xs font-bold">Иных</span>
               <span class="text-white text-lg font-bold">30</span>
@@ -44,18 +44,18 @@
               <div  @click="openAddSource" class="cursor-pointer w-full h-full flex items-center justify-center">
                 <button  class="text-white text-xl font-bold">Добавить</button>
               </div>
-              <div v-if="addSourceIsOpen" class="absolute mt-12 px-2">
+              <div v-if="addSourceIsOpen" class="absolute mt-12">
                 <AddSource />
               </div>
             </div>
           </div>
           <div
-            class="w-full mt-2 px-2 outline-dashed outline-[3px] outline-outlineColor flex justify-center overflow-y-auto h-full"
+            class="w-full mt-2 px-2 outline-dashed outline-[3px] outline-outlineColor flex justify-center overflow-y-auto custom-scrollbar  h-full"
           >
             <div
               class="text-activeText w-50 grid grid-cols-3 gap-3 mr-2 max-h-[80vh]"
             >
-              <SourceCard class="my-2" :bg_color="'red-400'" v-for="el in 30" />
+              <SourceCard class="my-2" :bg_hover_color="'red-500'" :bg_color="'red-400'" v-for="el in 30" />
             </div>
             <div
               class="outline-dashed outline-[1px] outline-outlineColor"
@@ -66,6 +66,7 @@
               <SourceCard
                 class="my-2"
                 :bg_color="'blue-400'"
+                :bg_hover_color="'blue-500'"
                 v-for="el in 10"
               />
             </div>
@@ -135,6 +136,6 @@ export default {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #323232;
+  background-color: #858585;
 }
 </style>

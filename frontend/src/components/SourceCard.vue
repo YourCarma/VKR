@@ -1,5 +1,5 @@
 <template>
-    <div :class="`bg-${bg_color} max-w-xs rounded max-h-xs shadow-lg`">
+    <div :class="`bg-${bg_color} max-w-xs rounded max-h-xs shadow-lg hover:bg-${bg_hover_color} duration-200`">
         <img class="w-full"
             src="https://sun6-21.userapi.com/s/v1/ig2/NzeRweKn932nP043_plx1DWS5rQK9-hk9KOo1m5zfaP6C51WlHDjtEpG4qzlP1SBxevASPZedzd3FkOOidNviuZF.jpg?size=1077x1077&quality=96&crop=1,1,1077,1077&ava=1"
             alt="Sunset in the mountains">
@@ -36,7 +36,8 @@ export default {
     },
 
     props: {
-        bg_color: String
+        bg_color: String,
+        bg_hover_color: String
     }
 }
 </script>
