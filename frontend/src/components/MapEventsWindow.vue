@@ -18,6 +18,9 @@
         <p class="text-activeText py-2 text-center rounded-xl mb-4 text-xl font-medium duration-500">
           Эфир событий
         </p>
+        <div class="mb-2">
+          <Toogle  :label="'Включить эфир'" />
+        </div>
         <input
           class="w-full rounded-xl h-10 border-[1.5px] bg-transparent px-4 text-activeText placeholder:text-unactiveText border-neutral-500 dark:border-neutral-200 duration-500"
           type="text" placeholder="Поиск событий" />
@@ -49,6 +52,7 @@
 </template>
 <script>
 import Map from "./Map.vue";
+import Toogle from "./Toogle.vue";
 import BaseIcon from "./BaseIcon.vue";
 import SidebarMain from "./SidebarMain.vue";
 export default {
@@ -56,6 +60,7 @@ export default {
     Map,
     BaseIcon,
     SidebarMain,
+    Toogle
   },
   computed: {
     isDarkMode() {
