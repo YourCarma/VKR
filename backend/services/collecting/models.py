@@ -4,30 +4,16 @@ from datetime import datetime
 metadata = MetaData()
 
 
-
-
-sources_location = Table(
-    "sources_location",
-    metadata,
-    Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("name", String, nullable=False),
-)
-
-sources_category = Table(
-    "sources_category",
-    metadata,
-    Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("name", String, nullable=False),
-)
-
 sources = Table(
     "sources",
     metadata,
     Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("name", String, nullable=False),
+    Column("tg_id", String, nullable=False),
     Column("url", String, nullable=False),
-    Column("info", String),
-    Column('avatar_path', String, nullable=True)
+    Column("title", String, nullable=False),
+    Column("chatname", String, nullable=False),
+    Column("description", String),
+    Column('photo_profile_path', String, nullable=True)
 )
 
 news = Table(

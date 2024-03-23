@@ -181,3 +181,4 @@ researches/w2v_cbow_334272 (2).bin
 researches/w2v_skipgram_334272 (2).bin
 researches/navec_news_v1_1B_250K_300d_100q.tar
 researches/reduced_news_with_vectors.csv
+backend/services/collecting/utils/telegram_parser/VKR.session
