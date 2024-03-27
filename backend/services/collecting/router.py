@@ -2,6 +2,7 @@ from datetime import date
 from pathlib import Path
 from loguru import logger
 from fastapi import APIRouter,  HTTPException, Depends, Request
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import select, insert, delete, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import func
@@ -194,6 +195,7 @@ async def insert_row(schema,
 #             ),
 #     await session.execute(stmt)
 #     await session.commit()
+
 
 
 @router.get("/get_sources")

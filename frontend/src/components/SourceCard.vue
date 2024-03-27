@@ -1,7 +1,7 @@
 <template>
     <div :class="`bg-${bg_color} max-w-xs rounded max-h-xs shadow-lg hover:bg-${bg_hover_color} duration-200`">
         <img class="w-full"
-        :src="imageUrl"
+        src="/backend/downloads/rosich_ru_profile_photo.jpg"
             alt="Sunset in the mountains">
         <div class="px-2 py-2 ">
             <div class="font-bold text-sm mb-2 font-roboto">{{ info.title }}</div>
@@ -42,25 +42,8 @@ export default {
             img_url: null
         }
     },
-
-
-    mounted() {
-    this.getImage();
-  },
   methods: {
-    async getImage() {
-      try {
-        const response = await fetch('http://localhost:8000/backend/downloads/boris_rozhin_profile_photo.jpg');
-        if (!response.ok) {
-          throw new Error('Failed to load image');
-        }
-        const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
-        this.imageUrl = imageUrl;
-      } catch (error) {
-        console.error('Error loading image:', error);
-      }
-    }
+    
   }
 }
 </script>
