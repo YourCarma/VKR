@@ -13,7 +13,10 @@ sources = Table(
     Column("title", String, nullable=False),
     Column("chatname", String, nullable=False),
     Column("description", String),
-    Column('photo_profile_path', String, nullable=True)
+    Column('photo_profile_path', String, nullable=True),
+    Column('members_count', Integer, nullable=True),
+    Column("politic_view", String, nullable=False)
+    
 )
 
 news = Table(

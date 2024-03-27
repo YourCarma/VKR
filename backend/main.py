@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 
-from services.collecting import router as router_collecting
+from services.collecting.router import router as router_collecting
 app = FastAPI(
     title="WARMONGER"
 )
