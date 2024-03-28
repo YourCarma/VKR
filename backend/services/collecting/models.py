@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey, ARRAY, UUID
+from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey, ARRAY, UUID, Text
 
 from datetime import datetime
 metadata = MetaData()
@@ -12,7 +12,7 @@ sources = Table(
     Column("url", String, nullable=False),
     Column("title", String, nullable=False),
     Column("chatname", String, nullable=False),
-    Column("description", String),
+    Column("description", Text),
     Column('photo_profile_path', String, nullable=True),
     Column('members_count', Integer, nullable=True),
     Column("politic_view", String, nullable=False)
@@ -24,7 +24,7 @@ news = Table(
     metadata,
     Column("id", UUID, primary_key=True),
     Column("source_id", Integer, ForeignKey("sources.id")),
-    Column("text", String, nullable=False),
+    Column("text", Text, nullable=False),
     Column("url", String, nullable=False),
     Column("date", TIMESTAMP, nullable=False),
 )

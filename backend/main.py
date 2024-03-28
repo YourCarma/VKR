@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.staticfiles import StaticFiles
 
 from services.collecting.router import router as router_collecting
 app = FastAPI(
     title="WARMONGER"
 )
+
+app.mount("/downloads", StaticFiles(directory="downloads"), name="downloads")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

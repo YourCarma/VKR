@@ -2,7 +2,7 @@ from datetime import date
 from pathlib import Path
 from loguru import logger
 from fastapi import APIRouter,  HTTPException, Depends, Request
-from fastapi.staticfiles import StaticFiles
+
 from sqlalchemy import select, insert, delete, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import func
@@ -16,7 +16,7 @@ from services.collecting.utils.telegram_parser.get_chanel import getChatInfo
 
 router = APIRouter(
     prefix="/collecting",
-    tags=["Collectring"]
+    tags=["Collecting"]
 )
 
 
@@ -195,6 +195,7 @@ async def insert_row(schema,
 #             ),
 #     await session.execute(stmt)
 #     await session.commit()
+
 
 
 

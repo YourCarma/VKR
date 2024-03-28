@@ -26,12 +26,12 @@
             <div
               class="w-36 h-12 bg-red-500 rounded-full flex items-center justify-center flex-col hover:bg-red-700 duration-200 ml-2">
               <span class="text-white text-xs font-bold">Пророссийских </span>
-              <span class="text-white text-lg font-bold">105</span>
+              <span class="text-white text-lg font-bold">{{elefants.length}}</span>
             </div>
             <div
               class="w-36 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-col hover:bg-blue-700 duration-200 ml-2 ">
               <span class="text-white text-xs font-bold">Иных</span>
-              <span class="text-white text-lg font-bold">30</span>
+              <span class="text-white text-lg font-bold">{{ rats.length }}</span>
             </div>
             <div
               class="static w-60 h-12 bg-green-500 rounded-t-xl ml-96 flex jusify-end flex-col hover:bg-green-700 duration-200 ">
@@ -49,7 +49,7 @@
               <SourceCard class="my-2" :info="elefant" :bg_hover_color="'red-500'" :bg_color="'red-400'" v-for="elefant in elefants" :key="elefant"/>
             </div>
             <div class="outline-dashed outline-[1px] outline-outlineColor"></div>
-            <div class="text-activeText w-50 grid grid-cols-3 gap-3 ml-2 max-h-[80vh]">
+            <div class="text-activeText w-50 grid grid-cols-3 gap-3 ml-2 max-h-[50vh]">
               <SourceCard class="my-2" :info="rat" :bg_color="'blue-400'" :bg_hover_color="'blue-500'" v-for="rat in rats" :key="rat"/>
             </div>
           </div>
@@ -102,6 +102,7 @@ export default {
     .then((response) => {
       this.elefants = response.data.elefants;
       this.rats = response.data.rats;
+      console.log(this.elefants)
     })
     .catch((error) =>
     console.log(error))
