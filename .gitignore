@@ -183,3 +183,15 @@ researches/navec_news_v1_1B_250K_300d_100q.tar
 researches/reduced_news_with_vectors.csv
 backend/services/collecting/utils/telegram_parser/VKR.session
 backend/VKR.session
+backend/migration/README
+backend/migration/env.py
+backend/migration/env.py
+/backend/migration
+backend/migration/README
+backend/migration/versions/8cb031428a20_.py
+backend/migration/versions/8cb031428a20_.py
+backend/migration/versions/8a9479ab93ee_.py
+backend/migration/versions/37e31ddbf40c_.py
+backend/migration/versions/1790995c9260_.py
+backend/migration/README
+backend/migration/env.py

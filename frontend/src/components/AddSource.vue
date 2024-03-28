@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import BaseIcon from './BaseIcon.vue';
 export default {
     components:{
