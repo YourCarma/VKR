@@ -16,7 +16,7 @@ async def getChatInfo(chaturl):
         chat_title = chat.title
         chat_description = chat.description
         await app.download_media(message=chat.photo.big_file_id, file_name=f"{chatname}_profile_photo.jpg")
-        app.stop
+        app.stop()
         profile_photo_path = str(PurePath().joinpath(f"{chatname}_profile_photo.jpg"))
         logger.debug(chat)
         logger.debug(f"ID чата: {chat_id}")
