@@ -1,7 +1,9 @@
 from datetime import date
 from pathlib import Path
+import asyncio
 from loguru import logger
-from fastapi import APIRouter,  HTTPException, Depends, Request
+from fastapi import APIRouter,  HTTPException, Depends, Request, WebSocket, WebSocketDisconnect, BackgroundTasks
+from websockets.exceptions import ConnectionClosed
 
 from sqlalchemy import select, insert, delete, update
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,6 +13,7 @@ from database import get_async_session
 from services.collecting.schemas import CreateSource
 from services.collecting.models import sources, news, processed_news
 from services.collecting.utils.telegram_parser.get_chanel import getChatInfo
+from services.collecting.utils.telegram_parser.get_event import listen_event
 
 
 
@@ -223,6 +226,18 @@ async def add_fish(new_source: CreateSource,
     result["politic_view"] = new_source.politic_view
     await insert_row(result, sources, session)
     return {"status": f"Новый источник: {new_source.url} успешно добавлен!"}
+
+@router.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    channel_ids = [-1001730870551, 'test_chatVKR', 'warhistoryalconafter', 'voenacher']  # Примеры ID каналов, замените их на свои
+    try:
+        await listen_event(channel_ids, websocket)
+        # await asyncio.sleep(1)
+        logger.debug('fffff') 
+        # Интервал обновления
+    except WebSocketDisconnect as e:
+        logger.warning(e)
 
 # @router.delete("/delete_sourcse/{fish_id}")
 # async def delete_fish(fish_id: int, session: AsyncSession = Depends(get_async_session)):
