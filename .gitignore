@@ -195,3 +195,10 @@ backend/migration/versions/37e31ddbf40c_.py
 backend/migration/versions/1790995c9260_.py
 backend/migration/README
 backend/migration/env.py
+researches/results/checkpoint-39/config.json
+researches/results/checkpoint-39/model.safetensors
+researches/results/checkpoint-39/optimizer.pt
+researches/results/checkpoint-39/rng_state.pth
+researches/results/checkpoint-39/scheduler.pt
+researches/natashaResearch.ipynb
+/researches/results

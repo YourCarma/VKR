@@ -1,6 +1,6 @@
 from datetime import date
 from pathlib import Path
-import asyncio
+import pyautogui
 from loguru import logger
 from fastapi import APIRouter,  HTTPException, Depends, Request, WebSocket, WebSocketDisconnect, BackgroundTasks
 from websockets.exceptions import ConnectionClosed
@@ -227,17 +227,29 @@ async def add_fish(new_source: CreateSource,
     await insert_row(result, sources, session)
     return {"status": f"Новый источник: {new_source.url} успешно добавлен!"}
 
+
+import threading
+import time
+import logging
+
+logging.basicConfig(level=logging.INFO)
 @router.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     channel_ids = [-1001730870551, 'test_chatVKR', 'warhistoryalconafter', 'voenacher']  # Примеры ID каналов, замените их на свои
     try:
-        await listen_event(channel_ids, websocket)
-        # await asyncio.sleep(1)
-        logger.debug('fffff') 
-        # Интервал обновления
-    except WebSocketDisconnect as e:
-        logger.warning(e)
+        while True:
+            status = await websocket.receive_text()
+            if status == "True":
+                logger.debug('!!')
+                await listen_event(channel_ids, websocket)
+                
+            else:
+                pyautogui.hotkey('CTRL', 'C')
+    except (WebSocketDisconnect, ConnectionClosed):
+        # Клиент отключился
+        logger.debug("Client disconnected")
+        
 
 # @router.delete("/delete_sourcse/{fish_id}")
 # async def delete_fish(fish_id: int, session: AsyncSession = Depends(get_async_session)):
