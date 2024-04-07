@@ -1,0 +1,231 @@
+{
+    "_": "Message",
+    "id": 111,
+    "sender_chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "date": "2024-04-07 19:17:03",
+    "chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "mentioned": false,
+    "scheduled": false,
+    "from_scheduled": false,
+    "media": "MessageMediaType.PHOTO",
+    "media_group_id": 13700052988146474,
+    "has_protected_content": false,
+    "has_media_spoiler": false,
+    "photo": {
+        "_": "Photo",
+        "file_id": "AgACAgIAAx0Ee3DDRwADb2YSxv81JI3RSKCDe2yVuwnwxFK_AAJL1zEb8HuQSNCs0QfeCqqTAAgBAAMCAAN5AAceBA",
+        "file_unique_id": "AgADS9cxG_B7kEg",
+        "width": 576,
+        "height": 1280,
+        "file_size": 60373,
+        "date": "2024-04-07 19:07:01",
+        "thumbs": [
+            {
+                "_": "Thumbnail",
+                "file_id": "AgACAgIAAx0Ee3DDRwADb2YSxv81JI3RSKCDe2yVuwnwxFK_AAJL1zEb8HuQSNCs0QfeCqqTAAgBAAMCAANtAAceBA",
+                "file_unique_id": "AgADS9cxG_B7kEg",
+                "width": 144,
+                "height": 320,
+                "file_size": 11183
+            }
+        ]
+    },
+    "caption": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    "views": 1,
+    "forwards": 0,
+    "outgoing": true
+
+}
+▼ {
+    "_": "Message",
+    "id": 112,
+    "sender_chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "date": "2024-04-07 19:17:03",
+    "chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "mentioned": false,
+    "scheduled": false,
+    "from_scheduled": false,
+    "media": "MessageMediaType.PHOTO",
+    "media_group_id": 13700052988146474,
+    "has_protected_content": false,
+    "has_media_spoiler": false,
+    "photo": {
+        "_": "Photo",
+        "file_id": "AgACAgIAAx0Ee3DDRwADcGYSxv-fkG_IhXEVpax4JFrUdjSrAAJK1zEb8HuQSMxhqZ52ymT-AAgBAAMCAAN5AAceBA",
+        "file_unique_id": "AgADStcxG_B7kEg",
+        "width": 576,
+        "height": 1280,
+        "file_size": 60401,
+        "date": "2024-04-07 19:07:01",
+        "thumbs": [
+            {
+                "_": "Thumbnail",
+                "file_id": "AgACAgIAAx0Ee3DDRwADcGYSxv-fkG_IhXEVpax4JFrUdjSrAAJK1zEb8HuQSMxhqZ52ymT-AAgBAAMCAANtAAceBA",
+                "file_unique_id": "AgADStcxG_B7kEg",
+                "width": 144,
+                "height": 320,
+                "file_size": 11171
+            }
+        ]
+    },
+    "views": 1,
+    "forwards": 0,
+    "outgoing": true
+
+}
+▼ {
+    "_": "Message",
+    "id": 113,
+    "sender_chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "date": "2024-04-07 19:17:03",
+    "chat": {
+        "_": "Chat",
+        "id": -1002070987591,
+        "type": "ChatType.CHANNEL",
+        "is_verified": false,
+        "is_restricted": false,
+        "is_creator": true,
+        "is_scam": false,
+        "is_fake": false,
+        "title": "Test",
+        "username": "test_chatVKR",
+        "photo": {
+            "_": "ChatPhoto",
+            "small_file_id": "AQADAgADmtYxGxH2WEgAEAIAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "small_photo_unique_id": "AgADmtYxGxH2WEg",
+            "big_file_id": "AQADAgADmtYxGxH2WEgAEAMAA7ks6q8W____r6MqrfiNyFsABB4E",
+            "big_photo_unique_id": "AgADmtYxGxH2WEg"
+        },
+        "dc_id": 2,
+        "has_protected_content": false
+    },
+    "mentioned": false,
+    "scheduled": false,
+    "from_scheduled": false,
+    "media": "MessageMediaType.PHOTO",
+    "media_group_id": 13700052988146474,
+    "has_protected_content": false,
+    "has_media_spoiler": false,
+    "photo": {
+        "_": "Photo",
+        "file_id": "AgACAgIAAx0Ee3DDRwADcWYSxv9-5JCJkg_IBco-QQlGqV-3AAJM1zEb8HuQSLoSMzEVKFDLAAgBAAMCAAN5AAceBA",
+        "file_unique_id": "AgADTNcxG_B7kEg",
+        "width": 1280,
+        "height": 719,
+        "file_size": 216586,
+        "date": "2024-04-07 19:07:01",
+        "thumbs": [
+            {
+                "_": "Thumbnail",
+                "file_id": "AgACAgIAAx0Ee3DDRwADcWYSxv9-5JCJkg_IBco-QQlGqV-3AAJM1zEb8HuQSLoSMzEVKFDLAAgBAAMCAANtAAceBA",
+                "file_unique_id": "AgADTNcxG_B7kEg",
+                "width": 320,
+                "height": 180,
+                "file_size": 22282
+            }
+        ]
+    },
+    "views": 1,
+    "forwards": 0,
+    "outgoing": true
+}

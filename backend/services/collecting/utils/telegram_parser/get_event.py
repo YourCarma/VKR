@@ -17,7 +17,7 @@ async def listen_event(chanels_list, websocket):
     logger.success("Клиент запущен!")
     app.add_handler(MessageHandler(message_handler, filters.chat(chanels_list) & ~filters.forwarded))
     await app.start()
-    print('GGGG')
+    
     await idle()
     
     await app.stop()

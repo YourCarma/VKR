@@ -22,11 +22,11 @@ sources = Table(
 news = Table(
     "news",
     metadata,
-    Column("id", UUID, primary_key=True),
-    Column("source_id", Integer, ForeignKey("sources.id")),
+    Column("id", Integer, primary_key=True),
+    Column("source_id", Integer, ForeignKey("sources.tg_id")),
     Column("text", Text, nullable=False),
-    Column("url", String, nullable=False),
     Column("date", TIMESTAMP, nullable=False),
+    Column("locations", ARRAY(String), nullable=True),
 )
 
 processed_news = Table(
