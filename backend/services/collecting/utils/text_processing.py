@@ -37,20 +37,23 @@ class TextProcessor():
         self.doc.tag_ner(self.ner_tagger)
         self.doc.tag_morph(self.morph_tagger)
         for ner_category in ners_categories:
-            for span in self.doc.spans:
-                if ner_category == span.type:
-                    span_dict = {"text": span.text, "start": span.start, "stop": span.stop}
-                    ner_dict[ner_category].append(span_dict)
-                    if span.type == "LOC":
-                        span.normalize(self.morph_vocab)
-                        location = geolocator.geocode(span.normal)
-                        if location:
-                            span_dict["latitude"] = location.latitude
-                            span_dict["longitude"] = location.longitude
-                            logger.debug(f"{span.normal}: Широта: { location.latitude }, Долгота: { location.longitude }")
-                        else:
-                            print("Координаты не найдены для данной локации.")
-        logger.debug(ner_dict)
+            if self.doc.spans:
+                for span in self.doc.spans:
+                    if ner_category == span.type:
+                        span_dict = {"text": span.text, "start": span.start, "stop": span.stop}
+                        ner_dict[ner_category].append(span_dict)
+                        if span.type == "LOC":
+                            span.normalize(self.morph_vocab)
+                            location = geolocator.geocode(span.normal)
+                            if location:
+                                span_dict["latitude"] = location.latitude
+                                span_dict["longitude"] = location.longitude
+                            else:
+                                span_dict["latitude"] = 0
+                                span_dict["longitude"] = 0
+            else:
+                ner_dict[ner_category] = []
+        ner_dict = dict(ner_dict)
         return ner_dict
         
     
@@ -58,7 +61,7 @@ class TextProcessor():
         
         
         
-text = "Владимир Путин купил компанию Apple в Москве на Красной площади" 
+text = "Привет, это Женя Пригожин из Москвы! Я еду в Лондон, где живет Елизавета!" 
 processor = TextProcessor(text)
 text = processor.get_text()
 named_entities = processor.getNER()

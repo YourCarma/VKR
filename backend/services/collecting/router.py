@@ -11,7 +11,7 @@ from sqlalchemy.sql.expression import func
 from database import get_async_session
 
 from services.collecting.schemas import CreateSource
-from services.collecting.models import sources, news, processed_news
+from services.collecting.models import sources, news
 from services.collecting.utils.telegram_parser.get_chanel import getChatInfo
 from services.collecting.utils.telegram_parser.get_event import listen_event
 
@@ -232,17 +232,23 @@ import threading
 import time
 import logging
 
-logging.basicConfig(level=logging.INFO)
 @router.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(websocket: WebSocket, session: AsyncSession = Depends(get_async_session)):
+    logger.debug("Запрос списка источников из БД...")
+    stmt = (
+            select(sources)
+            )
+    
     await websocket.accept()
-    channel_ids = [-1001730870551, 'test_chatVKR', 'warhistoryalconafter', 'voenacher']  # Примеры ID каналов, замените их на свои
     try:
         while True:
             status = await websocket.receive_text()
             if status == "True":
-                logger.debug('!!')
-                await listen_event(channel_ids, websocket)
+                result = await session.execute(stmt)
+                rawData = rawDBdataToDict(result)
+                chat_list = [x["tg_id"] for x in rawData]
+                logger.success(f"Список источников загружен! {chat_list}")
+                await listen_event(chat_list, websocket, session, news, insert_row)
                 
             else:
                 pyautogui.hotkey('CTRL', 'C')
@@ -250,7 +256,14 @@ async def websocket_endpoint(websocket: WebSocket):
         # Клиент отключился
         logger.debug("Client disconnected")
         
-
+@router.get("/get_news")
+async def get_news(session: AsyncSession = Depends(get_async_session)):
+    stmt = (
+            select(sources.c.title, news).join(news).order_by(news.c.date.desc())
+            )
+    result = await session.execute(stmt)
+    rawData = rawDBdataToDict(result)
+    return rawData
 # @router.delete("/delete_sourcse/{fish_id}")
 # async def delete_fish(fish_id: int, session: AsyncSession = Depends(get_async_session)):
 #     await delete_fish_byID(fish_id, session)

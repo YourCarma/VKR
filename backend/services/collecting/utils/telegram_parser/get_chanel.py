@@ -26,7 +26,7 @@ async def getChatInfo(chaturl):
         logger.debug(f"Описание чата: {chat_description}")
         logger.debug(f"Путь к фото чата: {profile_photo_path}")
         
-    chat_info["tg_id"] = str(chat_id)
+    chat_info["tg_id"] = chat_id
     chat_info["url"] = chaturl
     chat_info["title"] = chat_title
     chat_info["chatname"] = chatname

@@ -19,28 +19,22 @@
           Эфир событий
         </p>
         <div class="mb-2">
-          <Toogle  :label="'Включить эфир'" />
+          <Toogle  :label="'Включить эфир'" v-model:checked="isMonitoring" />
         </div>
         <input
           class="w-full rounded-xl h-10 border-[1.5px] bg-transparent px-4 text-activeText placeholder:text-unactiveText border-neutral-500 dark:border-neutral-200 duration-500"
           type="text" placeholder="Поиск событий" />
         <div class="w-full px-2 overflow-y-scroll h-[80vh] custom-scrollbar duration-500">
-          <div v-for="i in 40" class="text-activeText pt-2 w-full duration-500">
+          <div v-for="event in dynamicNews" :key="event.id" class="text-activeText pt-2 w-full duration-500">
             <div class="border-2 rounded-xl px-2 py-2 flex relative items-center hover:bg-hoverBackground duration-200">
               <div class="h-full ">
 
-                <div class="flex justify-between text-red-600 uppercase text-bold">Повернутые на войне
-                  <div class="flex text-end  text-blue-500 text-xs">17:25 17.03.2024 </div>
+                <div class="flex justify-between text-red-600 uppercase text-bold text-sm">{{ event.title }}
+                  <div class="flex text-end  text-blue-500 text-xs">{{ event.date }}</div>
                 </div>
                 <BaseIcon name="chat" class="w-6 h-6 mt-1 absolute " />
-                <p class="pl-7 text-xs h-full text-justify">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Asperiores commodi excepturi aut quasi quo enim reprehenderit
-                  vero, aperiam quibusdam possimus nostrum, repellat corrupti
-                  laboriosam. Consectetur nisi eum eveniet quaerat. Mollitia!
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis similique quidem nisi placeat et
-                  modi numquam, eligendi consequuntur itaque, vel, officiis totam praesentium dolore ratione accusantium
-                  iste illo minima animi.
+                <p class="pl-7 text-xs h-full text-left whitespace-pre-line break-words">
+                  {{ event.text }}
                 </p>
               </div>
             </div>
@@ -51,6 +45,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import Map from "./Map.vue";
 import Toogle from "./Toogle.vue";
 import BaseIcon from "./BaseIcon.vue";
@@ -62,11 +57,31 @@ export default {
     SidebarMain,
     Toogle
   },
+
+  data(){
+    return {
+      news: [],
+      isMonitoring: false
+    }
+  },
+
   computed: {
     isDarkMode() {
       return this.$store.state.darkMode;
     },
+
+    dynamicNews(){
+      return this.news
+    }
   },
+
+  created(){
+    axios.get(`http://${process.env.VUE_APP_WARMONGER_IP }/collecting/get_news`)
+    .then( (response) => {
+      this.news = response.data
+      console.log(this.news)
+    })
+  }
 };
 </script>
 <style>
