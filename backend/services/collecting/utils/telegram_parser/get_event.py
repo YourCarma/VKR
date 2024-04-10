@@ -28,8 +28,9 @@ async def listen_event(chanels_list, websocket, session, news, insert_row):
         logger.debug(message_info)
         await insert_row(message_info, news, session)
         logger.success('Сообщение в БД загружено!')
-        message_info["chat_title"] = message.chat.title
-        await websocket.send_text(f"{message_info}")
+        message_info["title"] = message.chat.title
+        logger.warning(message_info)
+        await websocket.send_text(str(message_info).replace("\'", "\""))
     
     logger.success("Клиент запущен!")
     app.add_handler(MessageHandler(message_handler, filters.chat(chanels_list) & ~filters.forwarded))

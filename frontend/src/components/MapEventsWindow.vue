@@ -19,7 +19,7 @@
           Эфир событий
         </p>
         <div class="mb-2">
-          <Toogle  :label="'Включить эфир'" v-model:checked="isMonitoring" />
+          <Toogle @change="openChanel()" :label="'Включить эфир'" v-model:checked="isMonitoring" />
         </div>
         <input
           class="w-full rounded-xl h-10 border-[1.5px] bg-transparent px-4 text-activeText placeholder:text-unactiveText border-neutral-500 dark:border-neutral-200 duration-500"
@@ -61,7 +61,9 @@ export default {
   data(){
     return {
       news: [],
-      isMonitoring: false
+      isMonitoring: null,
+      isError: false,
+      isLoading: false,
     }
   },
 
@@ -81,7 +83,60 @@ export default {
       this.news = response.data
       console.log(this.news)
     })
+  },
+
+    methods:{
+      openChanel(){
+        if (this.isMonitoring)
+          {
+            console.log("Мониторинг")
+            this.connection.send("True")
+          }
+        else
+        {
+          console.log("Отмена")
+        }
   }
+    },
+  
+  mounted() {
+    this.connection = new WebSocket(
+      `ws://${process.env.VUE_APP_WARMONGER_IP }/collecting/ws`
+    );
+   
+    // setTimeout(() => {
+    //   this.isError = false;
+    //   this.isReady = false;
+    // }, 4000);
+
+    this.connection.onopen = () => {
+      console.log("Соединение мониторинга сообщений установлено!");
+      this.isLoading = false;
+      this.isReady = true;
+    };
+   
+
+    
+    this.connection.onmessage = (event) => {
+      console.log(event.data)
+      this.dynamicNews.unshift(JSON.parse(event.data))
+    };
+   
+
+    this.connection.onclose = (event) => {
+      console.log(this);
+      this.isError = true;
+      this.isLoading = false;
+    };
+
+    this.connection.onerror = (error) => {
+      console.log(this);
+      this.isError = true;
+      this.isLoading = false;
+    };
+    
+  },
+
 };
 </script>
 <style>
