@@ -29,6 +29,7 @@ async def listen_event(chanels_list, websocket, session, news, insert_row):
         await insert_row(message_info, news, session)
         logger.success('Сообщение в БД загружено!')
         message_info["title"] = message.chat.title
+        message_info["date"] = message.date.isoformat()
         logger.warning(message_info)
         await websocket.send_text(str(message_info).replace("\'", "\""))
     

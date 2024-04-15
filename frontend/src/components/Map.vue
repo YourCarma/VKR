@@ -1,19 +1,17 @@
 <template>
     <div class="border-idealBlue border-[6px] rounded-lg shadow-cards w-full h-full">
         <yandex-map :coords="coords" :use-object-manager="true" :object-manager-clusterize="true" :settings="settings"
-            :zoom="5" :cluster-options="clusterOptions">
-
-
-
-
+            :zoom="5">
+            <ymap-marker v-for="(item, index) in testEvent" :key="index" :balloon-template="balloonTemplate(item)"
+                :markerId="index" :cluster-name="1"
+                :coords="[item.named_entities.LOC[0].latitude, item.named_entities.LOC[0].longitude]" />
         </yandex-map>
 
     </div>
 </template>
 
 <script>
-import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps";
-import { mapActions, mapGetters } from 'vuex';
+import { yandexMap, ymapMarker } from "vue-yandex-maps";
 
 const settings = {
     apiKey: "9b855f9b-6853-4cb2-b2f8-f02951d693c4",
@@ -25,95 +23,77 @@ const settings = {
 
 export default {
     components: { yandexMap, ymapMarker },
+
+    props: {
+        event_news: Array
+    },
+
     computed: {
+        testEvent() {
+            return this.eventsWithLocs
+        },
+
+        eventsWithLocs() {
+            let map_events = this.event_news.map(x => ({ ...x }))
+            console.log(map_events)
+            map_events.forEach(element => {
+                if (element.named_entities.LOC.length == 0) {
+                    map_events.splice(map_events.indexOf(element), 1).map(x => ({ ...x }))
+                }
+            });
+            return map_events
+        }
     },
-    async mounted() {
-        const settings = {
-            ...this.settings
-        };
-        await loadYmap({ settings, debug: true });
-        this.ymaps_user = ymaps
-    },
+
     data() {
         return {
-            
-            markerfill_in: {
-                enabled: true,
-                color: "#B22222",
-                opacity: 0.5,
-            },
-            markerstroke_in: {
-                color: "#8B0000",
-                opacity: 0.5,
-                width: 2,
-            },
-            my_coords: [
-                54.82896654088406,
-                39.831893822753904
-            ],
             coords: [55.753215, 36.622504],
             settings: settings,
-            markerIconUSER: {
-                layout: "default#imageWithContent",
-                imageHref: "https://cdn-icons-png.flaticon.com/128/10345/10345653.png",
-                imageSize: [40, 40],
-                imageOffset: [-20, -20],
-                contentOffset: [0, 0],
-            },
-            markerIconATM: {
-                layout: "default#imageWithContent",
-                imageHref: "https://cdn-icons-png.flaticon.com/128/6059/6059866.png",
-                imageSize: [43, 43],
-                imageOffset: [0, 0],
-                contentOffset: [0, 15],
-            },
-            markerIconBANK: {
-                layout: "default#imageWithContent",
-                imageHref: "https://cdn-icons-png.flaticon.com/128/1511/1511143.png",
-                imageSize: [43, 43],
-                imageOffset: [0, 0],
-                contentOffset: [0, 15],
-            },
-
-            clusterOptions: {
-                1: {
-                    preset: 'islands#darkGreenClusterIcons',
-                    clusterDisableClickZoom: false,
-                    clusterOpenBalloonOnClick: true,
-                    clusterBalloonLayout: [
-                        "<ul class=list>",
-                        "{% for geoObject in properties.geoObjects %}",
-                        '<li><a href=# class="list_item">{{ geoObject.properties.balloonContentHeader|raw }}</a></li>',
-                        "{% endfor %}",
-                        "</ul>",
-                    ].join(""),
-                },
-            },
+            raw_events: null,
         };
     },
+
     methods: {
         balloonTemplate(item) {
             return `
-      <h1 class="text-idealBlue text-xl font-bold font-TT_Firs_Neue_Regular">${item.name
-                }</h1>
-      <a class="font-semibold font-TT_Firs_Neue_Regular text-base">Адрес: ${item.address
-                }</a>
-        <p> Загруженность отделения, мин: ${item.timing} </p>
-      <ul class="font-TT_Firs_Neue_Regular"><span class="font-bold text-idealBlue">Расписание работы:</span>
-        ${item.openHours
-                    .map((item) => `<li>${item.days}: ${item.hours}</li>`)
-                    .join("")}
-      </ul>
-      <ul class="font-TT_Firs_Neue_Regular"><span class="font-bold text-idealBlue">Категории:</span>
-        ${item.services.map((service) => `<li>${service}</li>`).join("")}
-      </ul>
+            <div class=>
+                <div class="w-full">
+                    <p class="text-lg w-full uppercase font-bold font-rale text-red-600">${item.title }</p>
+                    <p class="text-md w-full uppercase font-bold font-rale text-purple-600 border-dotted border-2 
+                    border-indigo-600 text-center py-2 bg-purple-100 duration-200 hover:bg-purple-300">${item.class }</p>
+                    <hr class="bg-gray-600 border-1 dark:bg-gray-700" />
+                </div>
+                <div class="flex flex-col h-full items-center">
+                    <div class="bg-blue-100 text-center  flex flex-row border-dotted border-2 border-indigo-600 w-full justify-center">
+                        <div class="text-xs font-rale font-bold px-1 mx-1">Локации:
+                            ${item.named_entities.LOC
+                            .map((el) => `<li class="whitespace-pre-line break-words text-left px-1 mx-1">${el.text}</li>`)
+                            .join("")}
+                                </div>
+                        <div class="text-xs font-rale font-bold px-1 mx-1">Персоны:
+                            ${item.named_entities.PER
+                            .map((el) => `<li class="whitespace-pre-line break-words text-left px-1 mx-1">${el.text}</li>`)
+                            .join("")}
+                            </div>
+                        <div class="text-xs font-rale font-bold px-1 mx-1">Организации:
+                            ${item.named_entities.ORG
+                            .map((el) => `<li class="whitespace-pre-line break-words text-left px-1 mx-1">${el.text}</li>`)
+                            .join("")}
+                            </div>
+                    </div>
+                    <div class="w-full">
+                        <p class="text-left text-xs whitespace-pre-line break-words font-montserrat">${item.text}</p>
+                    </div>
+                </div>
+                <hr class="bg-gray-600 border-1 dark:bg-gray-700" />
+                <p class="text-end w-full font-bold text-zink-600 text-xs font-roboto">${item.date }</p>
+            </div>
+
+      
     `;
         },
-
     },
-    props: {
 
-    },
 };
 </script>
 

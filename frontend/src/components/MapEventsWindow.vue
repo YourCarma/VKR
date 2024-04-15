@@ -8,7 +8,7 @@
       <div class="h-full px-2">
         <div class="relative h-full flex justify-center">
           <div class="absolute bottom-3 w-full flex items-center gap-2 justify-center px-2">
-            <Map />
+            <Map :event_news="dynamicNews" />
           </div>
         </div>
       </div>
@@ -22,20 +22,18 @@
           <Toogle @change="openChanel()" :label="'Включить эфир'" v-model:checked="isMonitoring" />
         </div>
         <input
-          class="w-full rounded-xl h-10 border-[1.5px] bg-transparent px-4 text-activeText placeholder:text-unactiveText border-neutral-500 dark:border-neutral-200 duration-500"
+          class="w-full rounded-sm h-10 border-[0.1px] bg-transparent px-4 text-activeText placeholder:text-unactiveText border-neutral-500 dark:border-neutral-200 duration-500"
           type="text" placeholder="Поиск событий" />
-        <div class="w-full px-2 overflow-y-scroll h-[80vh] custom-scrollbar duration-500">
-          <div v-for="event in dynamicNews" :key="event.id" class="text-activeText pt-2 w-full duration-500">
-            <div class="border-2 rounded-xl px-2 py-2 flex relative items-center hover:bg-hoverBackground duration-200">
-              <div class="h-full ">
-
-                <div class="flex justify-between text-red-600 uppercase text-bold text-sm">{{ event.title }}
-                  <div class="flex text-end  text-blue-500 text-xs">{{ event.date }}</div>
+        <div class="w-full overflow-y-scroll h-[80vh] custom-scrollbar duration-500">
+          <div v-for="event in dynamicNews" :key="event.id" class="text-activeText pt-2 w-full duration-500 ">
+            <div class=" px-2 py-2 flex relative items-center hover:bg-slate-300 dark:hover:bg-stone-700  duration-300 transition ease-in-out hover:-translate-y-1 hover:scale-103 bg-slate-200 shadow-xl  outline-dashed dark:bg-background outline-[1.5px] outline-outlineColor ">
+              <div class="h-full w-full">
+                <div class="flex justify-between text-red-600 uppercase font-bold text-xs font-rale">{{ event.title }}
                 </div>
-                <BaseIcon name="chat" class="w-6 h-6 mt-1 absolute " />
-                <p class="pl-7 text-xs h-full text-left whitespace-pre-line break-words">
+                <p class="text-xs h-full  text-left whitespace-pre-line break-words font-rale">
                   {{ event.text }}
                 </p>
+                <div class="text-end dark:text-orange-400 text-zink-600 text-xs font-roboto font-bold">{{ dataFromatter(event.date) }}</div>
               </div>
             </div>
           </div>
@@ -72,6 +70,8 @@ export default {
       return this.$store.state.darkMode;
     },
 
+    
+    
     dynamicNews(){
       return this.news
     }
@@ -79,7 +79,7 @@ export default {
 
   created(){
     axios.get(`http://${process.env.VUE_APP_WARMONGER_IP }/collecting/get_news`)
-    .then( (response) => {
+    .then((response) => {
       this.news = response.data
       console.log(this.news)
     })
@@ -96,7 +96,29 @@ export default {
         {
           console.log("Отмена")
         }
-  }
+  },
+  dataFromatter(data){
+      let date = new Date(data);
+
+      // Получаем день, месяц, год, часы, минуты и секунды
+      let day = date.getDate();
+      let month = date.getMonth() + 1; // Месяцы начинаются с 0, поэтому добавляем 1
+      let year = date.getFullYear();
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let seconds = date.getSeconds();
+
+      // Форматируем день, месяц, часы, минуты и секунды, чтобы они были двузначными, если меньше 10
+      day = day < 10 ? "0" + day : day;
+      month = month < 10 ? "0" + month : month;
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      // Создаем строку в формате "день.месяц.год часы:минуты:секунды"
+      let formattedDate = hours + ":" + minutes + ":" + seconds + " " + day + "." + month + "." + year
+      return formattedDate
+    },
     },
   
   mounted() {

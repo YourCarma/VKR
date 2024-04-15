@@ -36,14 +36,15 @@ class TextProcessor():
         self.doc.parse_syntax(self.syntax_parser)
         self.doc.tag_ner(self.ner_tagger)
         self.doc.tag_morph(self.morph_tagger)
+        docs_ners = list(set([x.type for x in self.doc.spans]))
         for ner_category in ners_categories:
-            if self.doc.spans:
+            if ner_category in docs_ners:
                 for span in self.doc.spans:
                     if ner_category == span.type:
-                        span_dict = {"text": span.text, "start": span.start, "stop": span.stop}
+                        span.normalize(self.morph_vocab)
+                        span_dict = {"text": span.normal, "start": span.start, "stop": span.stop}
                         ner_dict[ner_category].append(span_dict)
                         if span.type == "LOC":
-                            span.normalize(self.morph_vocab)
                             location = geolocator.geocode(span.normal)
                             if location:
                                 span_dict["latitude"] = location.latitude
@@ -61,7 +62,7 @@ class TextProcessor():
         
         
         
-text = "Привет, это Женя Пригожин из Москвы! Я еду в Лондон, где живет Елизавета!" 
+text = "Привет, Москва" 
 processor = TextProcessor(text)
 text = processor.get_text()
 named_entities = processor.getNER()
