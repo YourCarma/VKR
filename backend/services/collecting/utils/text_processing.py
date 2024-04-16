@@ -56,6 +56,7 @@ class TextProcessor():
                 ner_dict[ner_category] = []
         ner_dict = dict(ner_dict)
         return ner_dict
+    
         
     
         

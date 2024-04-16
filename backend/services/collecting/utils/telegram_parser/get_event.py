@@ -3,9 +3,10 @@ from pyrogram.handlers import MessageHandler
 from pyrogram.errors import FloodWait
 from pyrogram import filters
 from loguru import logger
-
+from pathlib import Path
 
 from services.collecting.utils.text_processing import TextProcessor
+from services.collecting.utils.tag_predict_onnx import RuBERTONNX
 
 channel_ids = [-1001730870551, 'test_chatVKR', 'warhistoryalconafter', 'voenacher']  # Примеры ID каналов, замените их на свои
 
@@ -21,10 +22,13 @@ async def listen_event(chanels_list, websocket, session, news, insert_row):
             text_to_process = message.caption
         message_info["text"] = text_to_process
         text_processor = TextProcessor(text_to_process)
+        current_dir = Path.cwd()
+        logger.warning(str(current_dir / 'rubert2-tiny_onnx' / 'model.onnx'))
+        predictor = RuBERTONNX(str(current_dir / 'rubert2-tiny_onnx' / 'model.onnx'), str(current_dir / 'rubert2-tiny_onnx'), 300) 
         message_info["source_id"] = message.chat.id
         message_info["date"] = message.date
         message_info["named_entities"] = text_processor.getNER()
-        message_info["class"] = 'Тестовый'
+        message_info["class"] = predictor.predict(text_to_process)
         logger.debug(message_info)
         await insert_row(message_info, news, session)
         logger.success('Сообщение в БД загружено!')

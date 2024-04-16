@@ -203,3 +203,5 @@ researches/results/checkpoint-39/scheduler.pt
 researches/natashaResearch.ipynb
 /researches/results
 researches/very_short_news.csv
+/backend/rubert2-tiny
+/backend/rubert2-tiny_onnx

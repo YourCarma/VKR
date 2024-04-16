@@ -4,7 +4,7 @@
             :zoom="5">
             <ymap-marker v-for="(item, index) in testEvent" :key="index" :balloon-template="balloonTemplate(item)"
                 :markerId="index" :cluster-name="1"
-                :coords="[item.named_entities.LOC[0].latitude, item.named_entities.LOC[0].longitude]" />
+                :coords="[item.named_entities.LOC[0].latitude, item.named_entities.LOC[0].longitude]" :clusterOptions="clusterOptions"/>
         </yandex-map>
 
     </div>
@@ -37,9 +37,12 @@ export default {
             let map_events = this.event_news.map(x => ({ ...x }))
             console.log(map_events)
             map_events.forEach(element => {
+                
                 if (element.named_entities.LOC.length == 0) {
+                    
                     map_events.splice(map_events.indexOf(element), 1).map(x => ({ ...x }))
                 }
+                console.log(element.named_entities.LOC)
             });
             return map_events
         }
@@ -50,6 +53,22 @@ export default {
             coords: [55.753215, 36.622504],
             settings: settings,
             raw_events: null,
+            clusterOptions: {
+        clusterOptions: {
+          1: {
+            clusterDisableClickZoom: false,
+            clusterOpenBalloonOnClick: true,
+            clusterBalloonLayout: [
+            '<ul class=list>',
+          '{% for geoObject in properties.geoObjects %}',
+          '<li><a href=# class="list_item">{{ geoObject.properties.balloonContentHeader|raw }}</a></li>',
+          '{% endfor %}',
+          '</ul>',
+        ].join('')
+            
+          },
+        },
+      },
         };
     },
 

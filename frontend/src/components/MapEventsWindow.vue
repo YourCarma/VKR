@@ -33,7 +33,9 @@
                 <p class="text-xs h-full  text-left whitespace-pre-line break-words font-rale">
                   {{ event.text }}
                 </p>
+                <div class="text-start dark:text-purple-400 text-purple-600 text-xs font-roboto font-bold">{{ event.class }}</div>
                 <div class="text-end dark:text-orange-400 text-zink-600 text-xs font-roboto font-bold">{{ dataFromatter(event.date) }}</div>
+
               </div>
             </div>
           </div>
