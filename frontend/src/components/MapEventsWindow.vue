@@ -8,7 +8,8 @@
       <div class="h-full px-2">
         <div class="relative h-full flex justify-center">
           <div class="absolute bottom-3 w-full flex items-center gap-2 justify-center px-2">
-            <Map :event_news="dynamicNews" />
+            <SmallLoader v-if="isLoading" />
+            <Map v-else :event_news="dynamicNews" />
           </div>
         </div>
       </div>
@@ -26,15 +27,18 @@
           type="text" placeholder="Поиск событий" />
         <div class="w-full overflow-y-scroll h-[80vh] custom-scrollbar duration-500">
           <div v-for="event in dynamicNews" :key="event.id" class="text-activeText pt-2 w-full duration-500 ">
-            <div class=" px-2 py-2 flex relative items-center hover:bg-slate-300 dark:hover:bg-stone-700  duration-300 transition ease-in-out hover:-translate-y-1 hover:scale-103 bg-slate-200 shadow-xl  outline-dashed dark:bg-background outline-[1.5px] outline-outlineColor ">
+            <div
+              class=" px-2 py-2 flex relative items-center hover:bg-slate-300 dark:hover:bg-stone-900  duration-300 transition ease-in-out hover:-translate-y-1 hover:scale-103 bg-slate-200 shadow-xl  outline-dashed dark:bg-background outline-[1.5px] outline-outlineColor ">
               <div class="h-full w-full">
                 <div class="flex justify-between text-red-600 uppercase font-bold text-xs font-rale">{{ event.title }}
                 </div>
                 <p class="text-xs h-full  text-left whitespace-pre-line break-words font-rale">
                   {{ event.text }}
                 </p>
-                <div class="text-start dark:text-purple-400 text-purple-600 text-xs font-roboto font-bold">{{ event.class }}</div>
-                <div class="text-end dark:text-orange-400 text-zink-600 text-xs font-roboto font-bold">{{ dataFromatter(event.date) }}</div>
+                <div class="text-start dark:text-purple-400 text-purple-600 text-xs font-roboto font-bold">{{
+                  event.class }}</div>
+                <div class="text-end dark:text-orange-400 text-zink-600 text-xs font-roboto font-bold">{{
+                  dataFromatter(event.date) }}</div>
 
               </div>
             </div>
@@ -50,15 +54,17 @@ import Map from "./Map.vue";
 import Toogle from "./Toogle.vue";
 import BaseIcon from "./BaseIcon.vue";
 import SidebarMain from "./SidebarMain.vue";
+import SmallLoader from "./SmallLoader.vue";
 export default {
   components: {
     Map,
     BaseIcon,
     SidebarMain,
-    Toogle
+    Toogle,
+    SmallLoader
   },
 
-  data(){
+  data() {
     return {
       news: [],
       isMonitoring: null,
@@ -72,34 +78,72 @@ export default {
       return this.$store.state.darkMode;
     },
 
-    
-    
-    dynamicNews(){
+
+
+    dynamicNews() {
       return this.news
     }
   },
 
-  created(){
-    axios.get(`http://${process.env.VUE_APP_WARMONGER_IP }/collecting/get_news`)
-    .then((response) => {
-      this.news = response.data
-      console.log(this.news)
-    })
+  async created() {
+    this.isLoading = true;
+    await axios.get(`http://${process.env.VUE_APP_WARMONGER_IP}/collecting/get_news`)
+      .then((response) => {
+        this.news = response.data
+        this.isLoading = false
+        console.log(this.news)
+
+      })
   },
 
-    methods:{
-      openChanel(){
-        if (this.isMonitoring)
-          {
-            console.log("Мониторинг")
-            this.connection.send("True")
-          }
-        else
-        {
-          console.log("Отмена")
-        }
-  },
-  dataFromatter(data){
+  methods: {
+    openChanel() {
+      if (this.isMonitoring) {
+        console.log("Мониторинг")
+        this.connection.send("True")
+      }
+      else {
+        console.log("Отмена")
+      }
+    },
+
+    entetisPainting(text, entities)
+    {
+      let highlightedText = text;
+      let highlightedWord_len = 0;
+      Object.entries(entities).forEach(([entityType, entityArray]) => {
+        let color = this.getColorForEntityType(entityType);
+        entityArray.forEach(entity => {
+          console.log(entity)
+          let start = entity.start;
+          let stop = entity.stop;
+       
+          
+          let highlightedWord = `<span class="text-gray-100 ${color}">${text.substring(start - highlightedWord_len, stop+highlightedWord_len)}</span>`;
+
+          console.log(highlightedWord);
+          highlightedWord_len = highlightedWord.length
+         console.log(highlightedWord_len);
+          highlightedText = highlightedText.substring(0, start) + highlightedWord + highlightedText.substring(stop)
+          console.log(highlightedText)
+        });
+      });
+      return highlightedText;
+    },
+    getColorForEntityType(entityType) {
+      switch (entityType) {
+        case "LOC":
+          return "bg-green-800";
+        case "ORG":
+          return "bg-red-800";
+        case "PER":
+          return "bg-purple-800";
+        default:
+          return "black";
+      }
+    },
+
+    dataFromatter(data) {
       let date = new Date(data);
 
       // Получаем день, месяц, год, часы, минуты и секунды
@@ -121,13 +165,13 @@ export default {
       let formattedDate = hours + ":" + minutes + ":" + seconds + " " + day + "." + month + "." + year
       return formattedDate
     },
-    },
-  
+  },
+
   mounted() {
     this.connection = new WebSocket(
-      `ws://${process.env.VUE_APP_WARMONGER_IP }/collecting/ws`
+      `ws://${process.env.VUE_APP_WARMONGER_IP}/collecting/ws`
     );
-   
+
     // setTimeout(() => {
     //   this.isError = false;
     //   this.isReady = false;
@@ -138,14 +182,14 @@ export default {
       this.isLoading = false;
       this.isReady = true;
     };
-   
 
-    
+
+
     this.connection.onmessage = (event) => {
       console.log(event.data)
       this.dynamicNews.unshift(JSON.parse(event.data))
     };
-   
+
 
     this.connection.onclose = (event) => {
       console.log(this);
@@ -158,7 +202,7 @@ export default {
       this.isError = true;
       this.isLoading = false;
     };
-    
+
   },
 
 };
